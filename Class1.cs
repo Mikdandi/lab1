@@ -209,7 +209,7 @@ namespace lab1
             {
                 VisibleEror = Visibility.Visible;
                 VisibleBirthday = Visibility.Hidden;
-
+                
 
             }
             return age;
