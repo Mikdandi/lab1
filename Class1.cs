@@ -191,19 +191,26 @@ namespace lab1
         int YourAge(DateTime Birthday)
         {
 
-            int age;
-            age = DateTime.Today.Year - BirthDate.Year;
-            if (DateTime.Today.DayOfYear < BirthDate.DayOfYear &&
-                DateTime.Today.Year != BirthDate.Year)
+            int age=0;
+            if (DateTime.Today >= BirthDate )
             {
-                age = age - 1;
+                age = DateTime.Today.Year - BirthDate.Year;
+                if (DateTime.Today.DayOfYear < BirthDate.DayOfYear &&
+                    DateTime.Today.Year != BirthDate.Year)
+                {
+                    age = age - 1;
+                }
+                VisibleBirthday = Visibility.Hidden;
+                VisibleEror = Visibility.Hidden;
+                if ( BirthDate.DayOfYear == DateTime.Today.DayOfYear)
+                    VisibleBirthday = Visibility.Visible;
             }
-            if (age >= 0 && age < 135 && BirthDate.DayOfYear == DateTime.Today.DayOfYear)
-                _visibleBirthday = Visibility.Visible;
-
-            if (age < 0 || age > 135)
+            else
             {
-                _visibleEror = Visibility.Visible;
+                VisibleEror = Visibility.Visible;
+                VisibleBirthday = Visibility.Hidden;
+
+
             }
             return age;
         }
@@ -216,9 +223,10 @@ namespace lab1
             _birthDate = value;
 
             OnPropertyChanged("BirthDate");
-            OnPropertyChanged("Age");
+          
             OnPropertyChanged("WestCalendar");
             OnPropertyChanged("ChineeseCalendar");
+            OnPropertyChanged("Age");
         }
 
 
